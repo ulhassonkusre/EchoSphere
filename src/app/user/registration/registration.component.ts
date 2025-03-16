@@ -40,7 +40,7 @@ export class RegistrationComponent {
     const confirmPassword = group.get('confirmPassword');
   
     if (!password || !confirmPassword) return null;
-  
+    if (!confirmPassword.value) return null; 
     if (confirmPassword.value && password.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMisMatch: true });
       return { passwordMisMatch: true };
