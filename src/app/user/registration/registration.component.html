@@ -1,0 +1,45 @@
+<div class="mb-4 h2 text-success">
+    Register
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Enter full name" formControlName="fullName">
+        <p class="error-feedback" *ngIf="isFieldInvalid('fullName')">{{ getErrorMessage('fullName') }}</p>
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" type="email" placeholder="Enter email" formControlName="email">
+        <p class="error-feedback" *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</p>
+    </div>
+    <div class="mb-3">
+        <select class="form-control bg-body-secondary" formControlName="gender">
+            <option value="" disabled selected>Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <p class="error-feedback" *ngIf="isFieldInvalid('gender')">{{ getErrorMessage('gender') }}</p>
+    </div>
+    <div class="mb-3">
+        <div class="position-relative">
+            <input type="date" class="form-control bg-body-secondary" formControlName="dob" [style]="form.get('dob')?.value ? 'black' : 'gray'">
+        </div>
+        <p class="error-feedback" *ngIf="isFieldInvalid('dob')">{{ getErrorMessage('dob') }}</p>
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" type="password" placeholder="Enter password" formControlName="password">
+        <p class="error-feedback" *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</p>
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" type="password" placeholder="Enter confirm password" formControlName="confirmPassword">
+        <p class="error-feedback" *ngIf="isFieldInvalid('confirmPassword')">{{ getErrorMessage('confirmPassword') }}</p>
+        
+
+          
+    </div>
+    <div class="mb-4">
+        <button type="submit" class="btn btn-success w-100 rounded-3">
+            Register
+        </button>
+    </div>
+</form>
