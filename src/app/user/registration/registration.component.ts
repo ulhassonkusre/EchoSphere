@@ -12,7 +12,6 @@ import { FormValidationService } from '../../shared/form-validation.service';
 })
 export class RegistrationComponent {
   form: FormGroup;
-
   constructor(private formBuilder: FormBuilder, private validationService: FormValidationService) {
     this.form = this.formBuilder.group(
       {
@@ -38,7 +37,6 @@ export class RegistrationComponent {
   passwordMatchValidator: ValidatorFn = (group: AbstractControl) => {
     const password = group.get('password');
     const confirmPassword = group.get('confirmPassword');
-  
     if (!password || !confirmPassword) return null;
     if (!confirmPassword.value) return null; 
     if (confirmPassword.value && password.value !== confirmPassword.value) {
@@ -58,6 +56,19 @@ export class RegistrationComponent {
     return this.validationService.getErrorMessage(this.form, fieldName);
   }
 
+  onInputChange(fieldName: string) {
+    this.validationService.maxLengthStoper(this.form, fieldName);
+    const control = this.form.get(fieldName);
+    if (!control) return;
+
+    let value = control.value;
+
+    if (fieldName === 'fullName') {
+      value = value.replace(/[^A-Za-z\s]/g, '').replace(/^\s+/g, '').replace(/\s{2,}/g, ' ');
+    }
+    control.setValue(value, { emitEvent: false });
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -66,4 +77,5 @@ export class RegistrationComponent {
     }
     console.log('Form Submitted Successfully!', this.form.value);
   }
+  
 }

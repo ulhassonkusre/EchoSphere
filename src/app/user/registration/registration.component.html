@@ -1,45 +1,54 @@
 <div class="mb-4 h2 text-success">
-    Register
+    Get Started
 </div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-        <input class="form-control bg-body-secondary" placeholder="Enter full name" formControlName="fullName">
-        <p class="error-feedback" *ngIf="isFieldInvalid('fullName')">{{ getErrorMessage('fullName') }}</p>
+    <div [ngClass]="{'mb-1': isFieldInvalid('fullName'), 'mb-3': !isFieldInvalid('fullName')}">
+        <input class="form-control bg-body-secondary" placeholder="Enter full name" formControlName="fullName" (input)="onInputChange('fullName')">
+        <i class="error-feedback" *ngIf="isFieldInvalid('fullName')">{{ getErrorMessage('fullName') }}</i>
     </div>
-    <div class="mb-3">
+    <div [ngClass]="{'mb-1': isFieldInvalid('email'), 'mb-3': !isFieldInvalid('email')}">
         <input class="form-control bg-body-secondary" type="email" placeholder="Enter email" formControlName="email">
-        <p class="error-feedback" *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</p>
+        <i class="error-feedback" *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</i>
     </div>
-    <div class="mb-3">
+    <div [ngClass]="{'mb-1': isFieldInvalid('gender'), 'mb-3': !isFieldInvalid('gender')}">
         <select class="form-control bg-body-secondary" formControlName="gender">
             <option value="" disabled selected>Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
         </select>
-        <p class="error-feedback" *ngIf="isFieldInvalid('gender')">{{ getErrorMessage('gender') }}</p>
+        <i class="error-feedback" *ngIf="isFieldInvalid('gender')">{{ getErrorMessage('gender') }}</i>
     </div>
-    <div class="mb-3">
+  <div [ngClass]="{'mb-1': isFieldInvalid('dob'), 'mb-3': !isFieldInvalid('dob')}">
         <div class="position-relative">
             <input type="date" class="form-control bg-body-secondary" formControlName="dob" [style]="form.get('dob')?.value ? 'black' : 'gray'">
         </div>
-        <p class="error-feedback" *ngIf="isFieldInvalid('dob')">{{ getErrorMessage('dob') }}</p>
+        <i class="error-feedback" *ngIf="isFieldInvalid('dob')">{{ getErrorMessage('dob') }}</i>
     </div>
-    <div class="mb-3">
+    <div [ngClass]="{'mb-1': isFieldInvalid('password'), 'mb-3': !isFieldInvalid('password')}">
         <input class="form-control bg-body-secondary" type="password" placeholder="Enter password" formControlName="password">
-        <p class="error-feedback" *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</p>
+        <i class="error-feedback" *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</i>
     </div>
-    <div class="mb-3">
+    <div [ngClass]="{'mb-1': isFieldInvalid('confirmPassword'), 'mb-3': !isFieldInvalid('confirmPassword')}">
         <input class="form-control bg-body-secondary" type="password" placeholder="Enter confirm password" formControlName="confirmPassword">
-        <p class="error-feedback" *ngIf="isFieldInvalid('confirmPassword')">{{ getErrorMessage('confirmPassword') }}</p>
-        
-
-          
+        <i class="error-feedback" *ngIf="isFieldInvalid('confirmPassword')">{{ getErrorMessage('confirmPassword') }}</i>
     </div>
+    <div class="text-center mt-2">
+        <p class="text-muted">
+            People who use our service may have uploaded your contact information to 
+            <a href="https://en.wikipedia.org/wiki/Ecosphere_(planetary)" class="text-success fw-bold">EchoSphere</a>.
+        </p>
+    </div>
+    
     <div class="mb-4">
-        <button type="submit" class="btn btn-success w-100 rounded-3">
-            Register
-        </button>
+        <button type="submit" class="btn btn-success w-100 rounded-3">Get Started Now</button>
     </div>
+    <div class="text-center">
+        <p class="text-muted">
+            Already have an account? 
+            <a routerLink="/login" class="text-success fw-bold">Login here</a>
+        </p>
+    </div>
+    
 </form>
